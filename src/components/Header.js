@@ -1,6 +1,14 @@
 import styled from "styled-components";
 import logo from '../images/home-logo.svg';
 import search from '../images/search-icon.svg';
+import home from '../images/nav-home.svg';
+import jobs from '../images/nav-jobs.svg';
+import message from '../images/nav-messaging.svg';
+import network from '../images/nav-network.svg';
+import notification from '../images/nav-notifications.svg';
+import work from '../images/nav-work.svg';
+import down from '../images/down-icon.svg';
+import user from '../images/user.svg';
 
 export default function Header() {
     return (
@@ -19,6 +27,68 @@ export default function Header() {
                         <img src={search} />
                     </SearchIcon>
                 </Search>
+                <Nav>
+                    <NavListWrap>
+                        <NavList className="active">
+                            <a>
+                                <img src={home} />
+                                <span>Home</span>
+                            </a>
+                        </NavList>
+
+                        <NavList>
+                            <a>
+                                <img src={network} />
+                                <span>My Network</span>
+                            </a>
+                        </NavList>
+
+                        <NavList>
+                            <a>
+                                <img src={jobs} />
+                                <span>Jobs</span>
+                            </a>
+                        </NavList>
+
+                        <NavList>
+                            <a>
+                                <img src={message} />
+                                <span>Messaging</span>
+                            </a>
+                        </NavList>
+
+                        <NavList>
+                            <a>
+                                <img src={notification} />
+                                <span>Notifications</span>
+                            </a>
+                        </NavList>
+
+                        <User>
+                            <a>
+                                <img src={user} />
+                                <span>Me</span>
+                                <img src={down} />
+                            </a>
+
+                            <SignOut>
+                                <a>
+                                    Sign out
+                                </a>
+                            </SignOut>
+                        </User>
+
+                        <Work>
+                            <a>
+                                <img src={work} />
+                                <span>
+                                    Work
+                                    <img src={down} />
+                                </span>
+                            </a>
+                        </Work>
+                    </NavListWrap>
+                </Nav>
             </Content>
         </Container>
     )
@@ -84,4 +154,118 @@ const SearchIcon = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+`;
+
+const Nav = styled.nav`
+    margin-left: auto;
+    display: block;
+    @media (max-width: 768px) {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        background: white;
+        width: 100%;
+    }
+`;
+
+const NavListWrap = styled.ul`
+    display: flex;
+    flex-wrap: nowrap;
+    list-style-type: none;
+
+    .active {
+        span:after {
+        content: "";
+        transform: scaleX(1);
+        border-bottom: 2px solid var(--white, #fff);
+        bottom: 0;
+        left: 0;
+        position: absolute;
+        transition: transform 0.2s ease-in-out;
+        width: 100%;
+        border-color: rgba(0, 0, 0, 0.9);
+        }
+    }
+`;
+
+const NavList = styled.li`
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    a {
+        align-items: center;
+        background: transparent;
+        display: flex;
+        flex-direction: column;
+        font-size: 12px;
+        font-weight: 400;
+        justify-content: center;
+        line-height: 1.5;
+        min-height: 52px;
+        min-width: 80px;
+        position: relative;
+        text-decoration: none;
+
+        span {
+        color: rgba(0, 0, 0, 0.6);
+        display: flex;
+        align-items: center;
+        }
+
+        @media (max-width: 768px) {
+        min-width: 70px;
+        }
+    }
+
+    &:hover,
+    &:active {
+        a {
+        span {
+            color: rgba(0, 0, 0, 0.9);
+        }
+        }
+    }
+`;
+
+const SignOut = styled.div`
+    position: absolute;
+    top: 45px;
+    background: white;
+    border-radius: 0 0 5px 5px;
+    width: 100px;
+    height: 40px;
+    font-size: 16px;
+    transition-duration: 167ms;
+    text-align: center;
+    display: none;
+`;
+
+const User = styled(NavList)`
+    a > svg {
+        width: 24px;
+        border-radius: 50%;
+    }
+
+    a > img {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+    }
+
+    span {
+        display: flex;
+        align-items: center;
+    }
+
+    &:hover {
+        ${SignOut} {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        }
+    } 
+`;
+
+const Work = styled(User)`
+    border-left: 1px solid rgba(0, 0, 0, 0.08);
 `;
