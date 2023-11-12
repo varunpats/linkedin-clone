@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import user from '../images/user.svg';
+import media from '../images/media-svg.svg';
+import events from '../images/events-svg.svg';
+import article from '../images/article-svg.svg';
 
 export default function Main() {
     return (
         <Container>
             <ShareBox>
-                Share
                 <div>
                     <img src={user} />
                     <button>Start a post</button>
@@ -13,18 +15,17 @@ export default function Main() {
 
                 <div>
                     <button>
-                        <span>Photo</span>
+                        <img src={media} />
+                        <span>Media</span>
                     </button>
 
                     <button>
-                        <span>Video</span>
-                    </button>
-
-                    <button>
+                        <img src={events} />
                         <span>Event</span>
                     </button>
 
                     <button>
+                        <img src={article} />
                         <span>Write article</span>
                     </button>
                 </div>
@@ -95,9 +96,10 @@ const ShareBox = styled(CommonCard)`
             button {
                 img {
                     margin: 0 4px 0 -2px;
+                    height: 28px;
                 }
                 span {
-                    color: #70b5f9;
+                    color: rgba(0, 0, 0, 0.6);
                 }
             }
         }
