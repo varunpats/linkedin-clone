@@ -1,15 +1,19 @@
 import styled from "styled-components";
-import Header from "./Header"; 
+import { useNavigate } from "react-router-dom";
+import { connect } from "react-redux";
+import Header from "./Header";
 import Leftside from "./Leftside";
 import Main from "./Main";
 import Rightside from './Rightside';
 
-export default function Home() {
+function Home(props) {
+    const navigate = useNavigate();
+
     return (
         <>
             <Header />
-
             <Container>
+                {!props.user && navigate("/")}
                 <Section>
                     <h5><a>Hiring in a hurry? -&nbsp;</a></h5>
                     <p>Find talented pros in record time with Upwork and keep business moving.</p>
@@ -77,3 +81,11 @@ const Layout = styled.div`
         padding: 0 5px;
     }
 `;
+
+const mapStateToProps = (state) => {
+    return {
+        user: state.userState.user
+    }
+}
+
+export default connect(mapStateToProps)(Home)

@@ -1,11 +1,12 @@
 import styled from "styled-components";
+import { connect } from "react-redux";
 import photo from '../images/photo.svg';
 import card from '../images/card-bg.svg';
 import widget from '../images/widget-icon.svg';
 import item from '../images/item-icon.svg';
 import plus from '../images/plus-icon.svg';
 
-export default function Leftside() {
+function Leftside(props) {
     return (
         <Container>
             <ArtCard>
@@ -17,7 +18,7 @@ export default function Leftside() {
                         <Photo>
                             <img src={photo} />
                         </Photo>
-                        <Link>Welcome there!</Link>
+                        <Link>{props.user ? props.user.displayName : 'Welcome, there!'}</Link>
                     </a>
                     <a>
                         <AddPhotoText>Add a photo</AddPhotoText>
@@ -43,7 +44,7 @@ export default function Leftside() {
                 <a>
                     <span>Groups</span>
                 </a>
-                <a style={{display: "flex", justifyContent: "space-between"}}>
+                <a style={{ display: "flex", justifyContent: "space-between" }}>
                     <span>Events</span>
                     <img src={plus} />
                 </a>
@@ -215,3 +216,11 @@ const CommunityCard = styled(ArtCard)`
     }
   }
 `;
+
+const mapStateToProps = (state) => {
+    return {
+        user: state.userState.user
+    }
+}
+
+export default connect(mapStateToProps)(Leftside)
