@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { connect } from "react-redux";
 import logo from '../images/login-logo.svg';
 import hero from '../images/login-hero.svg';
 import google from '../images/google.svg';
-import { connect } from "react-redux";
 import { signInAPI } from '../actions/index';
 
 const Login = (props) => {

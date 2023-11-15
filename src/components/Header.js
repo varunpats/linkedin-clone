@@ -15,7 +15,6 @@ import user from '../images/user.svg';
 function Header(props) {
     return (
         <Container>
-            {console.log(props)}
             <Content>
                 <Logo>
                     <a href='/home'>
