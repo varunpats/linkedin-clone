@@ -17,7 +17,7 @@ function PostModal(props) {
     const handleChange = (e) => {
         const image = e.target.files[0];
 
-        if (image == "" | image == undefined) {
+        if (image === "" | image === undefined) {
             alert(`Not an image, image file is a ${typeof (image)}`)
             return;
         }
@@ -40,21 +40,21 @@ function PostModal(props) {
 
     return (
         <>
-            {props.showModal == "open" &&
+            {props.showModal === "open" &&
                 <Container>
                     <Content>
                         <Header>
                             <h2>Create a post</h2>
                             <button onClick={(e) => reset(e)}>
-                                <img src={close} />
+                                <img alt='' src={close} />
                             </button>
                         </Header>
                         <SharedContent>
                             <UserInfo>
                                 {
                                     props.user.photoURL ?
-                                        <img src={props.user.photoURL} /> :
-                                        <img src={user} />}
+                                        <img alt='' src={props.user.photoURL} /> :
+                                        <img alt='' src={user} />}
                                 <span>{props.user.displayName}</span>
                             </UserInfo>
                             <Editor>
@@ -78,9 +78,9 @@ function PostModal(props) {
                                                 Select an image to share
                                             </label>
                                         </p>
-                                        {shareImg && <img src={URL.createObjectURL(shareImg)} />}
+                                        {shareImg && <img alt='' src={URL.createObjectURL(shareImg)} />}
                                     </UploadImage>) : (
-                                    assetArea == "media" &&
+                                    assetArea === "media" &&
                                     <>
                                         <input
                                             type="text"
@@ -95,15 +95,15 @@ function PostModal(props) {
                         <SharedCreation>
                             <AttachAssets>
                                 <AssetButton onClick={() => switchAsset("image")}>
-                                    <img src={media} style={{ width: '26px' }} />
+                                    <img alt='' src={media} style={{ width: '26px' }} />
                                 </AssetButton>
                                 <AssetButton onClick={() => switchAsset("media")}>
-                                    <img src={video} style={{ width: '26px' }} />
+                                    <img alt='' src={video} style={{ width: '26px' }} />
                                 </AssetButton>
                             </AttachAssets>
                             <ShareComment>
                                 <AssetButton>
-                                    <img src={comment} style={{ width: '26px', marginRight: '5px' }} />
+                                    <img alt='' src={comment} style={{ width: '26px', marginRight: '5px' }} />
                                     Anyone
                                 </AssetButton>
                             </ShareComment>

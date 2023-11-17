@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import { connect } from "react-redux";
 import logo from '../images/login-logo.svg';
 import hero from '../images/login-hero.svg';
@@ -9,12 +10,13 @@ import { signInAPI } from '../actions/index';
 const Login = (props) => {
     const navigate = useNavigate();
 
+    useEffect(() => {
+        if (props.user)
+            navigate("/home")
+    }, [props.user])
+
     return (
         <Container>
-            {
-                props.user &&
-                navigate("/home")
-            }
             <Nav>
                 <a href='/'>
                     <img src={logo} />
