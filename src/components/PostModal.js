@@ -2,11 +2,13 @@ import styled from "styled-components";
 import { useState } from "react";
 import { connect } from "react-redux";
 import ReactPlayer from "react-player";
+import firebase from 'firebase/compat/app'
 import close from '../images/close.svg';
 import user from '../images/user.svg';
 import media from '../images/media-img.svg';
 import comment from '../images/comments.svg';
 import video from '../images/video.svg';
+import { postArticleAPI } from '../actions/index';
 
 function PostModal(props) {
     const [editorText, setEditorText] = useState("");
@@ -29,6 +31,21 @@ function PostModal(props) {
         setAssetArea('');
         setVideoLink('');
         setAssetArea(area);
+    }
+
+    const postArticle = (e) => {
+        e.preventDefault();
+
+        const payload = {
+            image: shareImg,
+            video: videoLink,
+            user: props.user,
+            description: editorText,
+            timestamp: firebase.firestore.Timestamp.now()
+        }
+
+        props.postArticle(payload);
+        reset(e);
     }
 
     const reset = (e) => {
@@ -107,7 +124,7 @@ function PostModal(props) {
                                     Anyone
                                 </AssetButton>
                             </ShareComment>
-                            <PostButton disabled={!editorText ? true : false}>
+                            <PostButton disabled={!editorText ? true : false} onClick={(e) => postArticle(e)}>
                                 Post
                             </PostButton>
                         </SharedCreation>
@@ -267,6 +284,8 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => ({})
+const mapDispatchToProps = (dispatch) => ({
+    postArticle: (payload) => dispatch(postArticleAPI(payload))
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostModal)
