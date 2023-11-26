@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import PostModal from './PostModal';
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import { getArticlesAPI } from '../actions/index';
 import user from '../images/user.svg';
 import media from '../images/media-svg.svg';
 import events from '../images/events-svg.svg';
@@ -14,8 +16,12 @@ import comments from '../images/comments.svg';
 import repost from '../images/repost.svg';
 import share from '../images/share.svg';
 
-export default function Main() {
+function Main(props) {
     const [showModal, setShowModal] = useState("close");
+
+    useEffect(() => {
+        props.getArticles()
+    }, [])
 
     const handleClick = (e) => {
         e.preventDefault();
@@ -36,7 +42,6 @@ export default function Main() {
                     <img src={user} />
                     <button onClick={handleClick}>Start a post</button>
                 </div>
-
                 <div>
                     <button>
                         <img src={media} />
@@ -302,3 +307,23 @@ const SocialActions = styled.div`
         }
     }
 `
+
+const Content = styled.div`
+    text-align: center;
+    $ > img {
+        width: 30px;
+    }
+`
+
+const mapStateToProps = (state) => {
+    return {
+        loading: state.articleState.loading,
+        user: state.useState?.user
+    }
+}
+
+const mapDispatchToProps = (dispatch) => ({
+    getArticles: () => dispatch(getArticlesAPI())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main)
